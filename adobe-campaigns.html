@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rachael Akwa — Adobe Campaign Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600;700&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red:      #FA0F00;
+    --red-dim:  #cc0d00;
+    --ink:      #1a1a1a;
+    --ink-mid:  #2d2d2d;
+    --text:     #3d3d3d;
+    --muted:    #777;
+    --border:   #e5e5e5;
+    --bg:       #ffffff;
+    --bg2:      #f9f9f9;
+    --bg3:      #f2f2f2;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 56px;
+    background: rgba(255,255,255,0.97);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+  }
+
+  .nav-logo span { color: var(--red); }
+
+  .nav-links {
+    display: flex;
+    gap: 32px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--ink); }
+
+  /* HERO */
+  .hero {
+    padding: 120px 56px 96px;
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .hero-label {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .hero-label::before {
+    content: '';
+    width: 24px;
+    height: 2px;
+    background: var(--red);
+    display: block;
+  }
+
+  .hero h1 {
+    font-size: clamp(42px, 5vw, 68px);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+  }
+
+  .hero h1 em {
+    font-style: normal;
+    color: var(--red);
+  }
+
+  .hero-sub {
+    margin-top: 22px;
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--muted);
+    max-width: 480px;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 12px;
+    margin-top: 36px;
+    flex-wrap: wrap;
+  }
+
+  .btn-red {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    background: var(--red);
+    color: #fff;
+    padding: 12px 24px;
+    text-decoration: none;
+    border: 1px solid var(--red);
+    transition: background 0.2s;
+    display: inline-block;
+  }
+
+  .btn-red:hover { background: var(--red-dim); border-color: var(--red-dim); }
+
+  .btn-outline {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    background: transparent;
+    color: var(--ink);
+    padding: 12px 24px;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    transition: border-color 0.2s;
+    display: inline-block;
+  }
+
+  .btn-outline:hover { border-color: var(--ink); }
+
+  /* HERO RIGHT — CHANNEL MAP */
+  .channel-map {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .channel-row {
+    display: flex;
+    gap: 10px;
+  }
+
+  .channel-chip {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    padding: 12px 16px;
+    flex: 1;
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .channel-chip:hover {
+    border-color: var(--red);
+    background: #fff5f5;
+  }
+
+  .channel-chip-label {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 4px;
+  }
+
+  .channel-chip-val {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .channel-center {
+    background: var(--ink);
+    padding: 16px;
+    text-align: center;
+    margin: 4px 0;
+  }
+
+  .channel-center-label {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #999;
+    margin-bottom: 4px;
+  }
+
+  .channel-center-val {
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 0 56px;
+  }
+
+  /* SECTION */
+  .section-wrap {
+    padding: 88px 56px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    margin-bottom: 48px;
+  }
+
+  .s-num {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--red);
+  }
+
+  .s-title {
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.015em;
+  }
+
+  /* FIT */
+  .fit-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--border);
+  }
+
+  .fit-card {
+    background: var(--bg);
+    padding: 36px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.2s;
+  }
+
+  .fit-card:hover { background: var(--bg2); }
+
+  .fit-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--red);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+  }
+
+  .fit-card:hover::after { transform: scaleX(1); }
+
+  .fit-tag {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 12px;
+  }
+
+  .fit-card h3 {
+    font-size: 17px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 10px;
+    line-height: 1.4;
+  }
+
+  .fit-card p {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--muted);
+  }
+
+  .fit-card p strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* EXPERIENCE */
+  .exp-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+    background: var(--border);
+  }
+
+  .exp-item {
+    background: var(--bg);
+    padding: 36px;
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 40px;
+    transition: background 0.2s;
+  }
+
+  .exp-item:hover { background: var(--bg2); }
+
+  .exp-co {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .exp-role {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 6px;
+    line-height: 1.6;
+  }
+
+  .exp-date {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+  }
+
+  .exp-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+    justify-content: center;
+  }
+
+  .exp-bullets li {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--muted);
+    padding-left: 16px;
+    position: relative;
+  }
+
+  .exp-bullets li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 9px;
+    width: 6px; height: 1.5px;
+    background: var(--red);
+  }
+
+  .exp-bullets li strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  /* PROJECTS */
+  .proj-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .proj-card {
+    border: 1px solid var(--border);
+    padding: 32px;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+    background: var(--bg);
+  }
+
+  .proj-card:hover {
+    border-color: var(--red);
+    box-shadow: 0 6px 24px rgba(0,0,0,0.06);
+    transform: translateY(-2px);
+  }
+
+  .proj-type {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 9px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 14px;
+  }
+
+  .proj-card h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+
+  .proj-card p {
+    font-size: 13.5px;
+    line-height: 1.75;
+    color: var(--muted);
+  }
+
+  .proj-card p strong {
+    color: var(--text);
+    font-weight: 500;
+  }
+
+  .proj-link {
+    margin-top: 18px;
+    font-family: 'Source Code Pro', monospace;
+    font-size: 10px;
+    color: var(--red);
+    letter-spacing: 0.08em;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .proj-link::after { content: '↗'; transition: transform 0.2s; }
+  .proj-card:hover .proj-link::after { transform: translate(2px, -2px); }
+
+  /* SKILLS */
+  .skills-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+  }
+
+  .skill-col {
+    background: var(--bg);
+    padding: 32px;
+  }
+
+  .skill-col h4 {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 9px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 18px;
+  }
+
+  .skill-list {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+
+  .skill-item {
+    font-size: 13px;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .skill-item::before {
+    content: '';
+    width: 4px; height: 4px;
+    background: var(--red);
+    flex-shrink: 0;
+  }
+
+  /* EDU */
+  .edu-strip {
+    background: var(--ink);
+    color: #fff;
+    padding: 48px 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .edu-school {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 5px;
+  }
+
+  .edu-deg { font-size: 13px; color: #999; }
+
+  .edu-tags { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  .edu-tag {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 12px;
+    border: 1px solid #333;
+    color: #aaa;
+  }
+
+  /* FOOTER */
+  footer {
+    padding: 36px 56px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .footer-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .footer-name span { color: var(--red); }
+
+  .footer-links {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .footer-links a {
+    font-family: 'Source Code Pro', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--ink); }
+
+  /* ANIMATE */
+  .fade { opacity: 0; transform: translateY(14px); transition: opacity 0.5s ease, transform 0.5s ease; }
+  .fade.in { opacity: 1; transform: translateY(0); }
+
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 96px 24px 60px; gap: 40px; }
+    .channel-map { display: none; }
+    .section-wrap { padding: 64px 24px; }
+    .divider { margin: 0 24px; }
+    .fit-grid { grid-template-columns: 1fr; }
+    .exp-item { grid-template-columns: 1fr; gap: 16px; }
+    .proj-grid { grid-template-columns: 1fr; }
+    .skills-row { grid-template-columns: repeat(2, 1fr); }
+    .edu-strip { padding: 40px 24px; flex-direction: column; align-items: flex-start; }
+    footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Rachael <span>Akwa</span></a>
+  <ul class="nav-links">
+    <li><a href="#fit">Why Adobe</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section>
+  <div class="hero">
+    <div>
+      <p class="hero-label">Global Integrated Campaign Marketing — Adobe</p>
+      <h1>Great campaigns are<br><em>architecture,</em><br>not just content.</h1>
+      <p class="hero-sub">CS + Brand Management student. I've run live campaigns, coordinated across channels, and reported on what worked. I think in systems — what each channel does, how they connect, and what the data says about where to go next.</p>
+      <div class="hero-cta">
+        <a href="#fit" class="btn-red">See the fit</a>
+        <a href="#" class="btn-outline" id="hero-email">Get in touch</a>
+      </div>
+    </div>
+
+    <!-- CHANNEL MAP VISUAL -->
+    <div class="channel-map fade">
+      <div class="channel-row">
+        <div class="channel-chip">
+          <div class="channel-chip-label">Paid</div>
+          <div class="channel-chip-val">Social · Display · Search</div>
+        </div>
+        <div class="channel-chip">
+          <div class="channel-chip-label">Owned</div>
+          <div class="channel-chip-val">Email · SEO · Web</div>
+        </div>
+      </div>
+      <div class="channel-center">
+        <div class="channel-center-label">Integrated Campaign Core</div>
+        <div class="channel-center-val">Consistent message. Coordinated execution. Measurable pipeline.</div>
+      </div>
+      <div class="channel-row">
+        <div class="channel-chip">
+          <div class="channel-chip-label">Events</div>
+          <div class="channel-chip-val">Webinars · Sponsorships</div>
+        </div>
+        <div class="channel-chip">
+          <div class="channel-chip-label">Sales</div>
+          <div class="channel-chip-val">BDR · Content Syndication</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHY ADOBE -->
+<section id="fit">
+  <div class="section-wrap">
+    <div class="section-header">
+      <span class="s-num">01</span>
+      <h2 class="s-title">Why I fit integrated campaigns at Adobe</h2>
+    </div>
+    <div class="fit-grid">
+      <div class="fit-card fade">
+        <div class="fit-tag">01 — Campaign Architecture</div>
+        <h3>I've built a multi-format campaign from scratch</h3>
+        <p>At <strong>Traverse</strong>, I architected a full content campaign — defining the audience, mapping channel roles (organic social, engagement, educational carousels), and sequencing posts to move people from awareness to intent. Not just posting — building a system.</p>
+      </div>
+      <div class="fit-card fade">
+        <div class="fit-tag">02 — Channel Coordination</div>
+        <h3>I think in channels, not just pieces</h3>
+        <p>Each post in the Traverse campaign was designed to serve a specific function in the broader journey — <strong>brand credibility, value education, pain point activation, CTA</strong>. I understand how channels work together to move an audience, which is exactly what integrated campaign coordination requires.</p>
+      </div>
+      <div class="fit-card fade">
+        <div class="fit-tag">03 — Reporting &amp; Optimization</div>
+        <h3>I track, report, and iterate — not just execute</h3>
+        <p>Monitored per-post engagement signals (saves, shares, comments, profile visits) as proxies for campaign goals. At <strong>Unite Us</strong> and in <strong>B154</strong>, I developed KPI frameworks and evaluated marketing programs against measurable outcomes — the same skill Adobe needs for QBRs and campaign optimization cycles.</p>
+      </div>
+      <div class="fit-card fade">
+        <div class="fit-tag">04 — Cross-Functional Influence</div>
+        <h3>I've aligned sales, product, design, and engineering</h3>
+        <p>Led a cross-functional team of 6 on the gamified learning platform. Coordinated with sales, product, and design at <strong>Unite Us</strong> and <strong>Sling</strong>. I know how to communicate marketing goals across organizational levels and keep stakeholders aligned without losing momentum.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-wrap">
+    <div class="section-header">
+      <span class="s-num">02</span>
+      <h2 class="s-title">Experience</h2>
+    </div>
+    <div class="exp-list">
+      <div class="exp-item fade">
+        <div>
+          <div class="exp-co">Traverse</div>
+          <div class="exp-role">Product Marketing</div>
+          <div class="exp-date">Nov 2025 — Present</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Architected and executed a <strong>multi-format content campaign</strong> for a live AI product — awareness, education, engagement, and conversion formats sequenced across a unified strategy</li>
+          <li>Coordinated channel roles: organic social for reach, carousels for education, engagement posts for community, direct CTAs for conversion</li>
+          <li>Tracked campaign performance using per-post metric signals and iterated strategy based on what the data showed</li>
+          <li>Defined consistent messaging and brand voice applied across <strong>12+ pieces</strong> shipped to a real audience</li>
+        </ul>
+      </div>
+      <div class="exp-item fade">
+        <div>
+          <div class="exp-co">Unite Us</div>
+          <div class="exp-role">Product Marketing Intern</div>
+          <div class="exp-date">Jun — Aug 2025</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Produced <strong>sales enablement materials and competitive battlecards</strong> that aligned messaging across sales and marketing</li>
+          <li>Collaborated with sales, product, and design to ensure brand and message consistency across all touchpoints</li>
+          <li>Researched market trends and competitor positioning to inform campaign messaging strategy</li>
+        </ul>
+      </div>
+      <div class="exp-item fade">
+        <div>
+          <div class="exp-co">Sling</div>
+          <div class="exp-role">Product Marketing Intern</div>
+          <div class="exp-date">Jan — Apr 2025</div>
+        </div>
+        <ul class="exp-bullets">
+          <li>Contributed to a PRD by identifying <strong>customer pain points and competitive gaps</strong> to sharpen campaign positioning</li>
+          <li>Supported cross-functional launch planning and collateral development across multiple teams</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-wrap">
+    <div class="section-header">
+      <span class="s-num">03</span>
+      <h2 class="s-title">Selected projects</h2>
+    </div>
+    <div class="proj-grid">
+      <a href="https://www.instagram.com/traverse.hq" target="_blank" class="proj-card fade">
+        <div class="proj-type">Integrated Campaign · Multi-Format · Live</div>
+        <h3>Traverse — Live Integrated Campaign</h3>
+        <p>Built and ran a full campaign for a real product: defined audience, mapped channel roles, sequenced content from awareness to conversion, tracked metrics, and iterated. <strong>12+ pieces live</strong>, still running. This is the closest thing to what Adobe's integrated campaign team does every day.</p>
+        <div class="proj-link">@traverse.hq on Instagram</div>
+      </a>
+      <a href="https://github.com/autinn/gamify-hc" target="_blank" class="proj-card fade">
+        <div class="proj-type">Project Management · Cross-Functional · Engineering</div>
+        <h3>Gamified Learning Platform</h3>
+        <p>Led a <strong>team of 6</strong> across frontend, backend, and QA to ship a production-ready app. Demonstrates the project management and cross-functional coordination Adobe's campaign team requires when working across sales, digital, events, and BDR.</p>
+        <div class="proj-link">github.com/autinn/gamify-hc</div>
+      </a>
+      <a href="https://github.com/rachaelakwa/revenue-prediction-model" target="_blank" class="proj-card fade">
+        <div class="proj-type">Analytics · Python · Campaign Measurement</div>
+        <h3>Customer Revenue Prediction Model</h3>
+        <p>Built a model to predict customer revenue contribution using <strong>Random Forest and XGBoost</strong>. Demonstrates the analytical capability to assess campaign ROI, identify high-value audience segments, and inform optimization decisions.</p>
+        <div class="proj-link">github.com/rachaelakwa/revenue-prediction-model</div>
+      </a>
+      <div class="proj-card fade" style="cursor:default;">
+        <div class="proj-type">Coursework · B154 · Integrated Strategy</div>
+        <h3>Strategic Brand Leadership</h3>
+        <p>Semester-long applied project: designed <strong>multi-channel growth strategies</strong>, ran experiments across audience segments, built KPI frameworks, and evaluated campaign effectiveness. The integrated strategy muscle Adobe's campaign team needs.</p>
+        <div class="proj-link" style="color:var(--muted); cursor:default;">Minerva University</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-wrap">
+    <div class="section-header">
+      <span class="s-num">04</span>
+      <h2 class="s-title">Skills</h2>
+    </div>
+    <div class="skills-row">
+      <div class="skill-col fade">
+        <h4>Campaign</h4>
+        <div class="skill-list">
+          <div class="skill-item">Integrated Strategy</div>
+          <div class="skill-item">Channel Coordination</div>
+          <div class="skill-item">Message Architecture</div>
+          <div class="skill-item">Content Sequencing</div>
+          <div class="skill-item">Launch Planning</div>
+        </div>
+      </div>
+      <div class="skill-col fade">
+        <h4>Reporting</h4>
+        <div class="skill-list">
+          <div class="skill-item">KPI Frameworks</div>
+          <div class="skill-item">Campaign Analytics</div>
+          <div class="skill-item">ROI Assessment</div>
+          <div class="skill-item">A/B Testing</div>
+          <div class="skill-item">Insight Communication</div>
+        </div>
+      </div>
+      <div class="skill-col fade">
+        <h4>Cross-Functional</h4>
+        <div class="skill-list">
+          <div class="skill-item">Stakeholder Alignment</div>
+          <div class="skill-item">Sales Enablement</div>
+          <div class="skill-item">Project Management</div>
+          <div class="skill-item">Competitive Research</div>
+          <div class="skill-item">Presentations</div>
+        </div>
+      </div>
+      <div class="skill-col fade">
+        <h4>Technical</h4>
+        <div class="skill-list">
+          <div class="skill-item">Python / SQL</div>
+          <div class="skill-item">Excel / PowerPoint</div>
+          <div class="skill-item">Figma / Canva</div>
+          <div class="skill-item">React / JavaScript</div>
+          <div class="skill-item">Data Visualization</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDU -->
+<div class="edu-strip">
+  <div>
+    <div class="edu-school">Minerva University</div>
+    <div class="edu-deg">B.S. Computer Science + Business — Brand Management concentration</div>
+  </div>
+  <div class="edu-tags">
+    <span class="edu-tag">Integrated Strategy</span>
+    <span class="edu-tag">Growth Hacking</span>
+    <span class="edu-tag">KPI Frameworks</span>
+    <span class="edu-tag">Behavioral Design</span>
+    <span class="edu-tag">Marketing Experiments</span>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-name">Rachael <span>Akwa</span></div>
+  <div class="footer-links">
+    <a href="#" id="email-link">Email</a>
+    <a href="https://www.linkedin.com/in/rachaelakwa" target="_blank">LinkedIn</a>
+    <a href="https://github.com/rachaelakwa" target="_blank">GitHub</a>
+  </div>
+</footer>
+
+<script>
+  const e = 'rachael@uni.minerva.edu';
+  document.getElementById('email-link').href = 'mailto:' + e;
+  document.getElementById('hero-email').href = 'mailto:' + e;
+
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(en => {
+      if (en.isIntersecting) en.target.classList.add('in');
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.fade').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
