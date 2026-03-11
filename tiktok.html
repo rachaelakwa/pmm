@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rachael Akwa — TikTok PMM Intern</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0a;
+    --surface: #111111;
+    --surface2: #1a1a1a;
+    --border: #2a2a2a;
+    --ink: #f0f0f0;
+    --ink-mid: #a0a0a0;
+    --muted: #555555;
+    --pink: #FF004F;
+    --teal: #00F2EA;
+    --pink-pale: rgba(255,0,79,0.1);
+    --teal-pale: rgba(0,242,234,0.1);
+    --card: #141414;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Space Grotesk', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* NOISE */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.5;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    height: 60px;
+    background: rgba(10,10,10,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+  }
+
+  .nav-logo span { color: var(--pink); }
+
+  .nav-cta {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--bg);
+    background: var(--pink);
+    text-decoration: none;
+    padding: 7px 18px;
+    border-radius: 4px;
+    transition: opacity 0.2s;
+    letter-spacing: 0.02em;
+  }
+
+  .nav-cta:hover { opacity: 0.85; }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    z-index: 1;
+    padding: 140px 48px 80px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 28px;
+    flex-wrap: wrap;
+  }
+
+  .pill {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    padding: 4px 12px;
+    border-radius: 20px;
+    border: 1px solid;
+  }
+
+  .pill-pink {
+    color: var(--pink);
+    border-color: rgba(255,0,79,0.3);
+    background: var(--pink-pale);
+  }
+
+  .pill-teal {
+    color: var(--teal);
+    border-color: rgba(0,242,234,0.3);
+    background: var(--teal-pale);
+  }
+
+  .pill-muted {
+    color: var(--muted);
+    border-color: var(--border);
+    background: transparent;
+  }
+
+  h1 {
+    font-size: clamp(34px, 4.5vw, 54px);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+    color: var(--ink);
+  }
+
+  h1 em {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--teal);
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    color: var(--ink-mid);
+    line-height: 1.65;
+    max-width: 520px;
+    margin-bottom: 36px;
+    font-weight: 400;
+  }
+
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+  .btn {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 12px 26px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: all 0.2s;
+    letter-spacing: 0.01em;
+  }
+
+  .btn-pink { background: var(--pink); color: white; }
+  .btn-pink:hover { opacity: 0.85; }
+  .btn-outline { border: 1px solid var(--border); color: var(--ink-mid); }
+  .btn-outline:hover { border-color: var(--ink-mid); color: var(--ink); }
+
+  /* STATS */
+  .stats {
+    position: relative;
+    z-index: 1;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: center;
+    gap: 0;
+  }
+
+  .stat {
+    flex: 1;
+    max-width: 220px;
+    padding: 28px 24px;
+    text-align: center;
+    border-right: 1px solid var(--border);
+  }
+
+  .stat:last-child { border-right: none; }
+
+  .stat-num {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 5px;
+  }
+
+  .stat-num .pink { color: var(--pink); }
+  .stat-num .teal { color: var(--teal); }
+
+  .stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* SECTIONS */
+  .section {
+    position: relative;
+    z-index: 1;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 72px 48px;
+  }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    color: var(--pink);
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  h2 {
+    font-size: clamp(24px, 3vw, 34px);
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 36px;
+    color: var(--ink);
+  }
+
+  h2 em {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--teal);
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 0 48px;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* FIT GRID */
+  .fit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  .fit-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 22px 24px;
+    transition: border-color 0.2s;
+  }
+
+  .fit-card:hover { border-color: #333; }
+
+  .fit-card.pink-border { border-color: rgba(255,0,79,0.2); background: rgba(255,0,79,0.04); }
+  .fit-card.teal-border { border-color: rgba(0,242,234,0.15); background: rgba(0,242,234,0.03); }
+
+  .fit-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+
+  .fit-jd {
+    font-size: 12.5px;
+    color: var(--muted);
+    font-style: italic;
+    border-left: 2px solid var(--border);
+    padding-left: 12px;
+    margin-bottom: 12px;
+    line-height: 1.55;
+  }
+
+  .fit-answer { font-size: 13.5px; color: #888; line-height: 1.65; }
+  .fit-answer strong { color: var(--ink); font-weight: 600; }
+
+  /* SPOTLIGHT */
+  .spotlight {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 40px 44px;
+    grid-column: 1 / -1;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .spotlight::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 280px; height: 280px;
+    background: radial-gradient(circle, rgba(0,242,234,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .spotlight::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -60px;
+    width: 220px; height: 220px;
+    background: radial-gradient(circle, rgba(255,0,79,0.06) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .spotlight-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .spotlight-title { font-size: 20px; font-weight: 700; color: var(--ink); margin-bottom: 4px; }
+
+  .spotlight-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 28px;
+  }
+
+  .spotlight-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+
+  .spotlight-col-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .spotlight-col-title.pink { color: var(--pink); }
+  .spotlight-col-title.teal { color: var(--teal); }
+
+  .spotlight-col-body { font-size: 13.5px; color: #888; line-height: 1.7; }
+  .spotlight-col-body strong { color: var(--ink); font-weight: 600; }
+
+  /* WORK */
+  .work-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  .work-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    transition: border-color 0.2s;
+  }
+
+  .work-card:hover { border-color: #333; }
+
+  .work-co {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .work-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 14px;
+  }
+
+  .work-title { font-size: 16px; font-weight: 600; color: var(--ink); }
+
+  .work-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .work-body { font-size: 13.5px; color: #888; line-height: 1.65; }
+  .work-body ul { padding-left: 16px; margin-top: 8px; }
+  .work-body li { margin-bottom: 6px; }
+  .work-body strong { color: var(--ink); font-weight: 600; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+
+  .chip {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    padding: 3px 9px;
+    border-radius: 3px;
+    border: 1px solid;
+  }
+
+  .chip-pink { color: var(--pink); border-color: rgba(255,0,79,0.25); background: var(--pink-pale); }
+  .chip-teal { color: var(--teal); border-color: rgba(0,242,234,0.2); background: var(--teal-pale); }
+  .chip-plain { color: var(--muted); border-color: var(--border); background: transparent; }
+
+  /* CONTACT */
+  .contact {
+    position: relative;
+    border-radius: 10px;
+    padding: 52px 48px;
+    text-align: center;
+    overflow: hidden;
+    background: var(--surface);
+    border: 1px solid var(--border);
+  }
+
+  .contact::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse at 20% 50%, rgba(255,0,79,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 50%, rgba(0,242,234,0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .contact-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    color: var(--muted);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .contact h2 {
+    margin-bottom: 8px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .contact p {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11.5px;
+    color: var(--muted);
+    margin-bottom: 28px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .contact-links {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+
+  .contact-btn {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    padding: 11px 24px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .contact-btn.pink { background: var(--pink); color: white; }
+  .contact-btn.pink:hover { opacity: 0.85; }
+  .contact-btn.outline { border: 1px solid var(--border); color: var(--ink-mid); }
+  .contact-btn.outline:hover { border-color: var(--ink-mid); }
+
+  footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 28px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    border-top: 1px solid var(--border);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade { opacity: 0; animation: fadeUp 0.55s ease forwards; }
+  .d1 { animation-delay: 0.1s; }
+  .d2 { animation-delay: 0.2s; }
+  .d3 { animation-delay: 0.3s; }
+
+  @media (max-width: 720px) {
+    nav { padding: 0 24px; }
+    .hero { padding: 112px 24px 60px; }
+    .section { padding: 60px 24px; }
+    hr { margin: 0 24px; }
+    .fit-grid, .work-grid, .spotlight-cols { grid-template-columns: 1fr; }
+    .stats { flex-wrap: wrap; }
+    .stat { border-right: none; border-bottom: 1px solid var(--border); max-width: 100%; width: 50%; }
+    .spotlight { padding: 28px 24px; }
+    .contact { padding: 36px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Rachael Akwa <span>/ TikTok</span></a>
+  <a href="#contact" class="nav-cta">Get in touch</a>
+</nav>
+
+<div class="hero">
+  <div class="eyebrow fade">
+    <span class="pill pill-pink">Measurement PMM Intern</span>
+    <span class="pill pill-teal">TikTok · Summer 2026</span>
+    <span class="pill pill-muted">San Jose</span>
+  </div>
+  <h1 class="fade d1">Measurement, analytics, and <em>making data tell the story.</em></h1>
+  <p class="hero-sub fade d2">I'm Rachael — CS + brand management student. I've built measurement infrastructure from scratch, synthesized research into enablement assets, and I understand the data layer behind marketing decisions.</p>
+  <div class="hero-actions fade d3">
+    <a href="#fit" class="btn btn-pink">See the fit →</a>
+    <a href="#work" class="btn btn-outline">View my work</a>
+  </div>
+</div>
+
+<div class="stats">
+  <div class="stat">
+    <div class="stat-num">2<span class="pink">×</span></div>
+    <div class="stat-label">PMM internships</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">6<span class="teal">+</span></div>
+    <div class="stat-label">Features shaped</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">8<span class="pink">+</span></div>
+    <div class="stat-label">Stakeholder interviews</div>
+  </div>
+  <div class="stat">
+    <div class="stat-num">3</div>
+    <div class="stat-label">Full-stack projects</div>
+  </div>
+</div>
+
+<div class="section" id="fit">
+  <div class="section-label">Role fit</div>
+  <h2>What the JD asks. <em>What I bring.</em></h2>
+  <div class="fit-grid">
+
+    <div class="fit-card pink-border">
+      <div class="fit-num">01</div>
+      <div class="fit-jd">"Help analyze basic metrics and datasets to support storytelling around measurement products."</div>
+      <div class="fit-answer">At <strong>Traverse</strong>, I designed a PostHog event tracking schema and UTM architecture to measure user behavior — then synthesized those signals into a content strategy grounded in metric performance (saves, shares, profile visits). I built the measurement layer and told the story from it.</div>
+    </div>
+
+    <div class="fit-card teal-border">
+      <div class="fit-num">02</div>
+      <div class="fit-jd">"Support the creation of product marketing materials — one-pagers, slides, FAQs, internal documentation."</div>
+      <div class="fit-answer">At <strong>Unite Us</strong>, I created battlecards, messaging matrices, competitor trackers, and differentiator docs used by 500+ stakeholders across Product, GTM, and Sales. Clean, structured enablement materials built for field use.</div>
+    </div>
+
+    <div class="fit-card pink-border">
+      <div class="fit-num">03</div>
+      <div class="fit-jd">"Gather and summarize insights on advertiser measurement needs, product usage, and industry trends."</div>
+      <div class="fit-answer">At <strong>Unite Us</strong>, I ran 8+ stakeholder interviews and 4 workshops to surface unmet needs before building. At <strong>Sling (Orzo)</strong>, I synthesized U.S. market research into structured frameworks that shaped product priorities. Research-to-insight is a consistent pattern across both.</div>
+    </div>
+
+    <div class="fit-card teal-border">
+      <div class="fit-num">04</div>
+      <div class="fit-jd">"Comfortable working with data, numbers, and structured problem-solving. SQL, Python, or data tools a plus."</div>
+      <div class="fit-answer">CS degree — Python, SQL, JavaScript, data structures. I ran a quasi-experimental growth study at <strong>Traverse</strong> (Instagram vs. organic baseline tracked in PostHog), which is structurally similar to a lift study. I'm comfortable in the data layer, not just the narrative layer.</div>
+    </div>
+
+  </div>
+</div>
+
+<hr>
+
+<div class="section" id="work">
+  <div class="section-label">Experience</div>
+  <h2>The work that <em>gets me here.</em></h2>
+
+  <div class="work-grid">
+
+    <div class="spotlight">
+      <div class="spotlight-label">Most relevant to this role</div>
+      <div class="spotlight-title">Measurement + Research + Enablement</div>
+      <div class="spotlight-sub">Traverse · Unite Us</div>
+      <div class="spotlight-cols">
+        <div>
+          <div class="spotlight-col-title teal">Measurement at Traverse</div>
+          <div class="spotlight-col-body">
+            Defined GTM positioning, ran audience research, and built a <strong>12-post content strategy tied to metric signals</strong>. Synthesized competitive landscape into a clear positioning framework. Shaped 6+ features through user research. Also designed PostHog + UTM tracking to measure channel performance — built the measurement layer and the strategy on top of it.
+          </div>
+        </div>
+        <div>
+          <div class="spotlight-col-title pink">Enablement at Unite Us</div>
+          <div class="spotlight-col-body">
+            Built a centralized CI hub for <strong>500+ stakeholders</strong> across Product, GTM, and Sales. Battlecards, messaging matrices, differentiator docs. Ran 8+ interviews and 4 workshops to ensure materials solved real field needs — not just looked good.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="work-card">
+      <div class="work-co">Traverse — own product</div>
+      <div class="work-header">
+        <div class="work-title">Product Marketing Lead</div>
+        <div class="work-date">Nov 2025 – Present</div>
+      </div>
+      <div class="work-body">
+        <ul>
+          <li>Defined GTM positioning and messaging for a travel app targeting 18–30 year-olds with group coordination friction</li>
+          <li>12-post Instagram strategy grounded in audience tension mapping — each post paired to a distinct insight and metric signal (saves, shares, comments, profile visits)</li>
+          <li>Synthesized competitive landscape into a positioning framework: planning companion vs. discovery tool (TripAdvisor)</li>
+          <li>Shaped 6+ features through user research; led full app redesign across all core flows</li>
+          <li>Designed PostHog event tracking + UTM schema to measure channel performance</li>
+        </ul>
+      </div>
+      <div class="chips">
+        <span class="chip chip-teal">GTM positioning</span>
+        <span class="chip chip-teal">Analytics</span>
+        <span class="chip chip-plain">Content strategy</span>
+        <span class="chip chip-plain">User research</span>
+        <span class="chip chip-plain">Competitive analysis</span>
+      </div>
+    </div>
+
+    <div class="work-card">
+      <div class="work-co">Unite Us — Healthtech</div>
+      <div class="work-header">
+        <div class="work-title">Product Marketing Intern</div>
+        <div class="work-date">Jun – Aug 2025</div>
+      </div>
+      <div class="work-body">
+        <ul>
+          <li>Built centralized CI hub: battlecards, trackers, messaging matrices, differentiator docs</li>
+          <li>Facilitated 8+ stakeholder interviews and 4 workshops across Product, GTM, Sales</li>
+          <li>Authored SOPs and onboarding workflows — cut update turnaround by ~50%</li>
+        </ul>
+      </div>
+      <div class="chips">
+        <span class="chip chip-pink">Enablement materials</span>
+        <span class="chip chip-pink">Research synthesis</span>
+        <span class="chip chip-plain">Stakeholder mgmt</span>
+      </div>
+    </div>
+
+    <div class="work-card">
+      <div class="work-co">Sling (Orzo) — Edtech</div>
+      <div class="work-header">
+        <div class="work-title">Product & Market Research Intern</div>
+        <div class="work-date">Jan – Apr 2025</div>
+      </div>
+      <div class="work-body">
+        <ul>
+          <li>Synthesized U.S. edtech research into personas, value props, and messaging frameworks</li>
+          <li>Authored PRD for SAT/ACT workflows, directly shaping 3 roadmap features</li>
+          <li>Built region-specific GTM plan with competitive insights and channel strategy</li>
+        </ul>
+      </div>
+      <div class="chips">
+        <span class="chip chip-plain">Market research</span>
+        <span class="chip chip-plain">PRD writing</span>
+        <span class="chip chip-plain">GTM planning</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<hr>
+
+<div class="section" id="contact">
+  <div class="contact">
+    <div class="contact-label">Let's talk</div>
+    <h2>Ready for <em>day one.</em></h2>
+    <p>Rachael Akwa · CS + Brand Management · Minerva University · Summer 2026</p>
+    <div class="contact-links">
+      <a class="contact-btn pink" href="https://linkedin.com/in/rachaelakwa" target="_blank">Connect on LinkedIn</a>
+      <a class="contact-btn outline" href="https://github.com/rachaelakwa" target="_blank">GitHub →</a>
+    </div>
+  </div>
+</div>
+
+<footer>rachaelakwa.github.io/pmm/tiktok.html</footer>
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.fit-card, .work-card, .spotlight').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(14px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+
+</body>
+</html>
