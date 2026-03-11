@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rachael Akwa — Precisely PMM Intern</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #F7F6F9;
+    --ink: #111018;
+    --ink-mid: #3A3845;
+    --muted: #8C8A98;
+    --border: #E0DDE8;
+    --accent: #5B2D8E;
+    --accent-pale: #F2EDF9;
+    --accent-mid: #7B4DB8;
+    --card: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Syne', sans-serif;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(91,45,142,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(91,45,142,0.04) 1px, transparent 1px);
+    background-size: 48px 48px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 48px;
+    height: 60px;
+    background: rgba(247,246,249,0.94);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--accent); }
+
+  .nav-cta {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+    border: 1.5px solid var(--accent);
+    padding: 6px 16px;
+    border-radius: 4px;
+    transition: all 0.2s;
+  }
+
+  .nav-cta:hover { background: var(--accent); color: white; }
+
+  .hero {
+    position: relative;
+    z-index: 1;
+    padding: 136px 48px 72px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--accent);
+    background: var(--accent-pale);
+    border: 1px solid rgba(91,45,142,0.15);
+    padding: 4px 11px;
+    border-radius: 3px;
+    letter-spacing: 0.08em;
+  }
+
+  .tag.muted {
+    color: var(--muted);
+    background: var(--bg);
+    border-color: var(--border);
+  }
+
+  h1 {
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+
+  h1 em {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    color: var(--ink-mid);
+    line-height: 1.65;
+    max-width: 540px;
+    margin-bottom: 36px;
+    font-weight: 400;
+  }
+
+  .hero-actions { display: flex; gap: 12px; }
+
+  .btn {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 12px 26px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .btn-primary { background: var(--accent); color: white; }
+  .btn-primary:hover { background: #4A2280; }
+  .btn-outline { border: 1.5px solid var(--border); color: var(--ink); }
+  .btn-outline:hover { border-color: var(--ink); }
+
+  .stats {
+    position: relative;
+    z-index: 1;
+    background: var(--ink);
+    display: flex;
+    justify-content: center;
+    gap: 64px;
+    padding: 36px 48px;
+    flex-wrap: wrap;
+  }
+
+  .stat-num {
+    font-size: 30px;
+    font-weight: 800;
+    color: white;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-num span { color: var(--accent-mid); }
+
+  .stat-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .section {
+    position: relative;
+    z-index: 1;
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 72px 48px;
+  }
+
+  .section-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    color: var(--accent);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  h2 {
+    font-size: clamp(26px, 3vw, 36px);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.1;
+    margin-bottom: 36px;
+  }
+
+  h2 em {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+
+  hr { border: none; border-top: 1px solid var(--border); margin: 0 48px; position: relative; z-index: 1; }
+
+  .fit-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  .fit-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 22px 24px;
+  }
+
+  .fit-card.highlight {
+    border-color: rgba(91,45,142,0.25);
+    background: var(--accent-pale);
+  }
+
+  .fit-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    margin-bottom: 8px;
+  }
+
+  .fit-jd {
+    font-size: 12.5px;
+    color: var(--muted);
+    font-style: italic;
+    border-left: 2px solid var(--border);
+    padding-left: 12px;
+    margin-bottom: 12px;
+    line-height: 1.55;
+  }
+
+  .fit-answer { font-size: 13.5px; color: var(--ink-mid); line-height: 1.6; }
+  .fit-answer strong { color: var(--ink); font-weight: 700; }
+
+  .work-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  .work-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 24px;
+    transition: box-shadow 0.2s;
+  }
+
+  .work-card:hover { box-shadow: 0 4px 20px rgba(91,45,142,0.08); }
+  .work-card.full { grid-column: 1 / -1; }
+
+  .work-co {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .work-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 14px;
+  }
+
+  .work-title { font-size: 16px; font-weight: 700; color: var(--ink); }
+
+  .work-date {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10.5px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .work-body { font-size: 13.5px; color: var(--ink-mid); line-height: 1.65; }
+  .work-body ul { padding-left: 16px; margin-top: 8px; }
+  .work-body li { margin-bottom: 6px; }
+  .work-body strong { color: var(--ink); font-weight: 600; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+
+  .chip {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--ink-mid);
+    background: #F0EDF5;
+    border: 1px solid var(--border);
+    padding: 3px 9px;
+    border-radius: 3px;
+  }
+
+  .chip.purple {
+    color: var(--accent);
+    background: var(--accent-pale);
+    border-color: rgba(91,45,142,0.15);
+  }
+
+  .spotlight {
+    background: var(--ink);
+    border-radius: 10px;
+    padding: 44px 48px;
+    grid-column: 1 / -1;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .spotlight::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 250px; height: 250px;
+    background: radial-gradient(circle, rgba(91,45,142,0.3) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .spotlight-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .spotlight-title { font-size: 20px; font-weight: 800; color: white; margin-bottom: 4px; }
+
+  .spotlight-sub {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: rgba(255,255,255,0.45);
+    margin-bottom: 24px;
+  }
+
+  .spotlight-cols { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 32px; }
+
+  .spotlight-col-title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--accent-mid);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .spotlight-col-body { font-size: 13px; color: rgba(255,255,255,0.65); line-height: 1.75; }
+  .spotlight-col-body strong { color: white; font-weight: 600; }
+
+  .contact {
+    background: var(--accent);
+    border-radius: 10px;
+    padding: 48px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .contact::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
+    background-size: 36px 36px;
+    pointer-events: none;
+  }
+
+  .contact h2 { color: white; margin-bottom: 8px; position: relative; z-index: 1; }
+
+  .contact p {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 28px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .contact-links { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; position: relative; z-index: 1; }
+
+  .contact-btn {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 11px 24px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: all 0.2s;
+  }
+
+  .contact-btn.white { background: white; color: var(--accent); }
+  .contact-btn.white:hover { background: #f0f0f0; }
+  .contact-btn.outline { background: transparent; color: white; border: 1.5px solid rgba(255,255,255,0.45); }
+  .contact-btn.outline:hover { border-color: white; }
+
+  footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 28px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .fade { opacity: 0; animation: fadeUp 0.55s ease forwards; }
+  .d1 { animation-delay: 0.1s; }
+  .d2 { animation-delay: 0.2s; }
+  .d3 { animation-delay: 0.3s; }
+
+  @media (max-width: 720px) {
+    nav { padding: 0 24px; }
+    .hero { padding: 112px 24px 60px; }
+    .stats { gap: 28px; padding: 24px; }
+    .section { padding: 60px 24px; }
+    hr { margin: 0 24px; }
+    .fit-grid, .work-grid, .spotlight-cols { grid-template-columns: 1fr; }
+    .work-card.full { grid-column: auto; }
+    .spotlight { padding: 28px 24px; }
+    .contact { padding: 36px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Rachael Akwa <span>/ Precisely</span></a>
+  <a href="#contact" class="nav-cta">Get in touch</a>
+</nav>
+
+<div class="hero">
+  <div class="eyebrow fade">
+    <span class="tag">Product Marketing Intern</span>
+    <span class="tag muted">Precisely · Summer 2026</span>
+  </div>
+  <h1 class="fade d1">CI research, structured frameworks, <em>and the CS to build the agent.</em></h1>
+  <p class="hero-sub fade d2">I'm Rachael — CS + brand management student. Competitive intelligence at Unite Us, market research and GTM at Sling (Orzo), and I build AI systems from scratch.</p>
+  <div class="hero-actions fade d3">
+    <a href="#fit" class="btn btn-primary">See the fit →</a>
+    <a href="#work" class="btn btn-outline">View my work</a>
+  </div>
+</div>
+
+<div class="stats">
+  <div>
+    <div class="stat-num">2<span>×</span></div>
+    <div class="stat-label">PMM internships</div>
+  </div>
+  <div>
+    <div class="stat-num">6<span>+</span></div>
+    <div class="stat-label">Features shaped</div>
+  </div>
+  <div>
+    <div class="stat-num">8<span>+</span></div>
+    <div class="stat-label">Stakeholder interviews</div>
+  </div>
+  <div>
+    <div class="stat-num">3</div>
+    <div class="stat-label">Full-stack projects</div>
+  </div>
+</div>
+
+<div class="section" id="fit">
+  <div class="section-label">Role fit</div>
+  <h2>What the JD asks. <em>What I bring.</em></h2>
+  <div class="fit-grid">
+
+    <div class="fit-card highlight">
+      <div class="fit-num">01</div>
+      <div class="fit-jd">"Architect a CI Copilot agent that synthesizes internal knowledge and external sources to deliver actionable, cited insights."</div>
+      <div class="fit-answer">At <strong>Unite Us</strong>, I built a centralized CI hub used by 500+ stakeholders — battlecards, competitor trackers, messaging matrices. I also design AI systems with prompting logic and output frameworks (gamified learning platform, Traverse analytics).</div>
+    </div>
+
+    <div class="fit-card highlight">
+      <div class="fit-num">02</div>
+      <div class="fit-jd">"Design a standardized CI output framework for clarity, consistency, and confident competitive positioning."</div>
+      <div class="fit-answer">At <strong>Sling (Orzo)</strong>, I synthesized research into personas and messaging frameworks for U.S. market entry. At <strong>Unite Us</strong>, I authored SOPs that cut update turnaround by ~50%. Standardized, repeatable output is a pattern across both.</div>
+    </div>
+
+    <div class="fit-card">
+      <div class="fit-num">03</div>
+      <div class="fit-jd">"Lead a cross-functional pilot with sales, sales engineering, and marketing to gather feedback."</div>
+      <div class="fit-answer">At <strong>Unite Us</strong>, I facilitated 8+ stakeholder interviews and 4 workshops across Product, GTM, and Sales to align on scope and surface unmet needs before building.</div>
+    </div>
+
+    <div class="fit-card">
+      <div class="fit-num">04</div>
+      <div class="fit-jd">"Curiosity and enthusiasm for AI agents, automation, and competitive intelligence."</div>
+      <div class="fit-answer">CS degree, applied — React, Flask, PostgreSQL, Docker, LLM integration. I've designed prompting logic, grounding rules, and fallback handling in production. I know how agents behave and where they break.</div>
+    </div>
+
+  </div>
+</div>
+
+<hr>
+
+<div class="section" id="work">
+  <div class="section-label">Experience</div>
+  <h2>The work that <em>gets me here.</em></h2>
+
+  <div class="work-grid">
+
+    <div class="spotlight">
+      <div class="spotlight-label">Most relevant to this role</div>
+      <div class="spotlight-title">CI + Research + AI Systems</div>
+      <div class="spotlight-sub">Unite Us · Sling (Orzo) · Traverse</div>
+      <div class="spotlight-cols">
+        <div>
+          <div class="spotlight-col-title">CI at Unite Us</div>
+          <div class="spotlight-col-body">Built a centralized CI hub for <strong>500+ stakeholders</strong>. Battlecards, trackers, messaging matrices. 8+ interviews and 4 workshops to ensure it solved real needs.</div>
+        </div>
+        <div>
+          <div class="spotlight-col-title">Research at Sling</div>
+          <div class="spotlight-col-body">Synthesized U.S. edtech research into personas and messaging frameworks. Authored a <strong>PRD shaping 3 roadmap features</strong> and a GTM plan for market entry.</div>
+        </div>
+        <div>
+          <div class="spotlight-col-title">AI at Traverse</div>
+          <div class="spotlight-col-body">Designed PostHog event tracking and UTM schema. Built a <strong>gamified learning platform</strong> with LLM feedback loops — prompting logic, grounding, output structure.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="work-card">
+      <div class="work-co">Traverse — own product</div>
+      <div class="work-header">
+        <div class="work-title">Product Marketing Lead</div>
+        <div class="work-date">Nov 2025 – Present</div>
+      </div>
+      <div class="work-body">
+        <ul>
+          <li>Defined GTM positioning for a travel planning app targeting group trip coordination friction</li>
+          <li>12-post Instagram strategy grounded in audience tension mapping and metric signals</li>
+          <li>Shaped 6+ features through user research; led full app redesign across core flows</li>
+        </ul>
+      </div>
+      <div class="chips">
+        <span class="chip purple">GTM strategy</span>
+        <span class="chip purple">Analytics</span>
+        <span class="chip">Growth</span>
+        <span class="chip">User research</span>
+      </div>
+    </div>
+
+    <div class="work-card">
+      <div class="work-co">Unite Us — Healthtech</div>
+      <div class="work-header">
+        <div class="work-title">Product Marketing Intern</div>
+        <div class="work-date">Jun – Aug 2025</div>
+      </div>
+      <div class="work-body">
+        <ul>
+          <li>Built centralized CI hub: battlecards, trackers, messaging matrices, differentiator docs</li>
+          <li>Facilitated 8+ stakeholder interviews and 4 workshops across Product, GTM, Sales</li>
+          <li>Authored SOPs and onboarding workflows — cut update turnaround by ~50%</li>
+        </ul>
+      </div>
+      <div class="chips">
+        <span class="chip purple">Competitive intelligence</span>
+        <span class="chip purple">Positioning</span>
+        <span class="chip">Stakeholder management</span>
+      </div>
+    </div>
+
+    <div class="work-card">
+      <div class="work-co">Sling (Orzo) — Edtech</div>
+      <div class="work-header">
+        <div class="work-title">Product & Market Research Intern</div>
+        <div class="work-date">Jan – Apr 2025</div>
+      </div>
+      <div class="work-body">
+        <ul>
+          <li>Researched U.S. edtech trends and learner motivations — synthesized into personas and messaging frameworks</li>
+          <li>Authored PRD for SAT/ACT workflows, directly shaping 3 roadmap features</li>
+          <li>Built region-specific GTM plan: competitive insights, channel strategy, feature sequencing</li>
+        </ul>
+      </div>
+      <div class="chips">
+        <span class="chip purple">Market research</span>
+        <span class="chip">PRD writing</span>
+        <span class="chip">GTM planning</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<hr>
+
+<div class="section" id="contact">
+  <div class="contact">
+    <h2>Let's <em>talk.</em></h2>
+    <p>Rachael Akwa · CS + Brand Management · Minerva University · Summer 2026</p>
+    <div class="contact-links">
+      <a class="contact-btn white" id="email-link" href="#"><span class="__cf_email__" data-cfemail="e69487858e87838aa693888fc88b8f8883949087c8838293">[email&#160;protected]</span></a>
+      <a class="contact-btn outline" href="https://linkedin.com/in/rachaelakwa" target="_blank">LinkedIn →</a>
+      <a class="contact-btn outline" href="https://github.com/rachaelakwa" target="_blank">GitHub →</a>
+    </div>
+  </div>
+</div>
+
+<footer>rachaelakwa.github.io/pmm-portfolio/precisely.html</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  document.getElementById('email-link').href = 'mailto:' + 'rachael' + '@' + 'uni.minerva.edu';
+
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.fit-card, .work-card, .spotlight').forEach(el 
