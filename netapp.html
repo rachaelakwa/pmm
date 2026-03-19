@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rachael Akwa - NetApp PMM Intern</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5F1EB;
+    --warm-white: #FDFAF5;
+    --ink: #1a1714;
+    --ink-light: #3d3830;
+    --muted: #8a8278;
+    --accent: #0067C5;
+    --accent-dark: #004F99;
+    --accent-light: #E8F1FB;
+    --border: #DDD8D0;
+    --card: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 56px;
+    height: 68px;
+    background: rgba(245, 241, 235, 0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+  }
+
+  .nav-logo em { font-style: italic; color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+    align-items: center;
+  }
+
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--ink); }
+
+  .nav-badge {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: var(--accent);
+    color: #fff;
+    padding: 5px 12px;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 120px 56px 80px;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+    display: block;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: clamp(48px, 5.5vw, 76px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+
+  .hero h1 em { font-style: italic; color: var(--accent); }
+
+  .hero-desc {
+    margin-top: 28px;
+    font-size: 16px;
+    line-height: 1.75;
+    color: var(--ink-light);
+    max-width: 460px;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 14px;
+    margin-top: 44px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .btn-filled {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: var(--accent);
+    color: #fff;
+    padding: 14px 28px;
+    text-decoration: none;
+    border: 1px solid var(--accent);
+    transition: background 0.2s, border-color 0.2s;
+    display: inline-block;
+  }
+
+  .btn-filled:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+
+  .btn-ghost {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: transparent;
+    color: var(--ink);
+    padding: 14px 28px;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    transition: border-color 0.2s;
+    display: inline-block;
+  }
+
+  .btn-ghost:hover { border-color: var(--ink); }
+
+  /* HERO RIGHT */
+  .hero-right {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .stat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 28px 32px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .stat-card:hover {
+    transform: translateX(4px);
+    box-shadow: -4px 0 0 var(--accent);
+  }
+
+  .stat-card-num {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: 42px;
+    color: var(--ink);
+    line-height: 1;
+    min-width: 80px;
+  }
+
+  .stat-card-num span { color: var(--accent); }
+  .stat-card-label { font-size: 15px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+  .stat-card-sub { font-size: 13px; color: var(--muted); line-height: 1.5; }
+
+  /* SECTIONS */
+  .section-wrap {
+    padding: 100px 56px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    margin-bottom: 56px;
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+  }
+
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 38px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 0 56px;
+  }
+
+  /* CALLOUT BANNER */
+  .callout-banner {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    padding: 28px 36px;
+    max-width: 1280px;
+    margin: 0 56px;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+
+  .callout-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    flex-shrink: 0;
+  }
+
+  .callout-text {
+    font-size: 15px;
+    line-height: 1.65;
+    color: var(--ink-light);
+  }
+
+  .callout-text strong { color: var(--ink); font-weight: 500; }
+
+  /* FIT GRID */
+  .fit-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+  }
+
+  .fit-card {
+    background: var(--warm-white);
+    padding: 44px 40px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.2s;
+  }
+
+  .fit-card:hover { background: var(--card); }
+
+  .fit-icon {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    font-size: 52px;
+    color: var(--accent);
+    opacity: 0.1;
+    position: absolute;
+    top: 16px;
+    right: 24px;
+    line-height: 1;
+    pointer-events: none;
+  }
+
+  .fit-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 14px;
+    line-height: 1.3;
+  }
+
+  .fit-card p {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--muted);
+  }
+
+  .fit-card p strong { color: var(--ink-light); font-weight: 500; }
+
+  /* TIMELINE */
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 1px;
+    background: var(--border);
+  }
+
+  .tl-item {
+    padding: 40px 0 40px 56px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+
+  .tl-item:last-child { border-bottom: none; }
+
+  .tl-dot {
+    position: absolute;
+    left: -5px;
+    top: 48px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--cream);
+    border: 2px solid var(--border);
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .tl-item:hover .tl-dot { background: var(--accent); border-color: var(--accent); }
+
+  .tl-header {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+
+  .tl-company {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 20px;
+  }
+
+  .tl-role {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+
+  .tl-date {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-left: auto;
+  }
+
+  .tl-bullets {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-top: 16px;
+    max-width: 700px;
+  }
+
+  .tl-bullets li {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--muted);
+    padding-left: 18px;
+    position: relative;
+  }
+
+  .tl-bullets li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 10px;
+    width: 5px; height: 1px;
+    background: var(--accent);
+  }
+
+  .tl-bullets li strong { color: var(--ink-light); font-weight: 500; }
+
+  /* DELIVERABLES TABLE */
+  .deliverables {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--border);
+    margin-top: 0;
+  }
+
+  .deliverable-item {
+    background: var(--warm-white);
+    padding: 32px 36px;
+    transition: background 0.2s;
+  }
+
+  .deliverable-item:hover { background: var(--card); }
+
+  .deliverable-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .deliverable-item h4 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--ink);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+
+  .deliverable-item p {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--muted);
+  }
+
+  .deliverable-item p strong { color: var(--ink-light); font-weight: 500; }
+
+  /* SKILLS */
+  .skills-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+  }
+
+  .skill-col {
+    background: var(--warm-white);
+    padding: 36px 32px;
+  }
+
+  .skill-col h4 {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+
+  .skill-list { display: flex; flex-direction: column; gap: 8px; }
+
+  .skill-item {
+    font-size: 13px;
+    color: var(--ink-light);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .skill-item::before {
+    content: '';
+    width: 4px; height: 4px;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  /* EDU STRIP */
+  .edu-strip {
+    background: var(--accent);
+    color: #fff;
+    padding: 48px 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .edu-school {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 22px;
+    margin-bottom: 6px;
+  }
+
+  .edu-degree { font-size: 14px; color: rgba(255,255,255,0.65); }
+
+  .edu-courses { display: flex; gap: 10px; flex-wrap: wrap; }
+
+  .edu-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    padding: 6px 12px;
+    border: 1px solid rgba(255,255,255,0.25);
+    color: rgba(255,255,255,0.75);
+    text-transform: uppercase;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--cream);
+    border-top: 1px solid var(--border);
+    padding: 44px 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .footer-id {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink);
+  }
+
+  .footer-id span { color: var(--accent); }
+
+  .footer-links { display: flex; gap: 28px; flex-wrap: wrap; }
+
+  .footer-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+    text-transform: uppercase;
+  }
+
+  .footer-links a:hover { color: var(--ink); }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    .hero { grid-template-columns: 1fr; padding: 100px 24px 60px; gap: 48px; }
+    .hero-right { display: none; }
+    .section-wrap { padding: 72px 24px; }
+    .divider { margin: 0 24px; }
+    .callout-banner { margin: 0 24px; }
+    .fit-grid { grid-template-columns: 1fr; }
+    .deliverables { grid-template-columns: 1fr; }
+    .skills-row { grid-template-columns: repeat(2, 1fr); }
+    .edu-strip { padding: 40px 24px; flex-direction: column; align-items: flex-start; }
+    footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="nav-logo">Rachael <em>Akwa</em></a>
+  <ul class="nav-links">
+    <li><a href="#fit">Why NetApp</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#deliverables">Deliverables</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><span class="nav-badge">PMM Intern Candidate</span></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section>
+  <div class="hero">
+    <div class="hero-left">
+      <p class="hero-tag">NetApp · Product Marketing Intern · Summer 2026</p>
+      <h1>Content that<br>scales. <em>Process</em><br>that sticks.</h1>
+      <p class="hero-desc">CS + Brand Management student at Minerva University. I've built centralized knowledge systems, authored SOPs that cut update cycles in half, and run structured content strategies for live products — the exact combination this role calls for.</p>
+      <div class="hero-cta">
+        <a href="#experience" class="btn-filled">See my experience</a>
+        <a href="#" class="btn-ghost" id="hero-email">Get in touch</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="stat-card">
+        <div class="stat-card-num">500<span>+</span></div>
+        <div class="stat-card-text">
+          <div class="stat-card-label">Stakeholders served</div>
+          <div class="stat-card-sub">CI hub used by Product, GTM, and Sales at Unite Us</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-num">50<span>%</span></div>
+        <div class="stat-card-text">
+          <div class="stat-card-label">Faster update turnaround</div>
+          <div class="stat-card-sub">SOPs and onboarding workflows I authored at Unite Us</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-num">12<span>+</span></div>
+        <div class="stat-card-text">
+          <div class="stat-card-label">Content pieces shipped</div>
+          <div class="stat-card-sub">Structured per audience insight and metric signal</div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-card-num">8<span>+</span></div>
+        <div class="stat-card-text">
+          <div class="stat-card-label">Stakeholder interviews run</div>
+          <div class="stat-card-sub">To define scope and surface unmet needs at Unite Us</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CALLOUT BANNER -->
+<div class="callout-banner">
+  <div class="callout-label">Why this role</div>
+  <div class="callout-text">
+    NetApp's PMM intern role sits at the intersection of <strong>content strategy and operational structure</strong> — building the systems that let a team scale without losing consistency. That's exactly the work I've done: a centralized CI hub at Unite Us, a metric-mapped content strategy at Traverse, and documentation that outlasted the projects that created it.
+  </div>
+</div>
+
+<div class="divider" style="margin-top: 56px;"></div>
+
+<!-- WHY I'M A FIT -->
+<section id="fit">
+  <div class="section-wrap">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">What I bring to NetApp</h2>
+    </div>
+    <div class="fit-grid">
+      <div class="fit-card">
+        <div class="fit-icon">01</div>
+        <h3>Process-building that outlasts the internship</h3>
+        <p>At Unite Us, I built a centralized Competitive Intelligence hub from scratch and authored SOPs and onboarding workflows used by 500+ stakeholders. The goal was always <strong>sustainable systems, not one-time outputs</strong> — exactly what NetApp's deliverables call for.</p>
+      </div>
+      <div class="fit-card">
+        <div class="fit-icon">02</div>
+        <h3>Content strategy with built-in structure</h3>
+        <p>At Traverse, every piece of content was mapped to a distinct audience insight, brand intent, and metric signal before it was written. That's not just content — that's <strong>a content calendar with accountability baked in</strong>.</p>
+      </div>
+      <div class="fit-card">
+        <div class="fit-icon">03</div>
+        <h3>Cross-functional by default</h3>
+        <p>I've facilitated stakeholder interviews, run collaborative workshops, and coordinated across Sales, Product, and Design at two companies. I know how to <strong>align diverse inputs into a single, usable output</strong> without losing anyone along the way.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-wrap">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Experience</h2>
+    </div>
+    <div class="timeline">
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-header">
+          <span class="tl-company">Unite Us</span>
+          <span class="tl-role">Product Marketing Intern</span>
+          <span class="tl-date">Jun 2025 - Aug 2025</span>
+        </div>
+        <ul class="tl-bullets">
+          <li>Built a <strong>centralized Competitive Intelligence hub</strong> on the company intranet, used by 500+ Product, GTM, and Sales stakeholders</li>
+          <li>Authored <strong>SOPs and onboarding workflows</strong> that cut update turnaround by ~50% and ensured long-term adoption</li>
+          <li>Facilitated 8+ stakeholder interviews and 4 collaborative workshops to define scope, align priorities, and surface unmet needs</li>
+          <li>Created battlecards, competitor trackers, messaging matrices, and technical differentiator docs used across active sales cycles</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-header">
+          <span class="tl-company">Traverse</span>
+          <span class="tl-role">Product Marketing Lead</span>
+          <span class="tl-date">Nov 2025 - Present</span>
+        </div>
+        <ul class="tl-bullets">
+          <li>Developed a <strong>12-post structured content strategy</strong>, mapping each piece to a distinct audience insight and engagement metric signal</li>
+          <li>Defined GTM positioning and messaging for an AI travel planning product targeting users experiencing decision fatigue</li>
+          <li>Shaped 6+ product features through user research and iterative feedback, influencing the product roadmap directly</li>
+          <li>Led a full app redesign across all core flows, coordinating across product and design</li>
+        </ul>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot"></div>
+        <div class="tl-header">
+          <span class="tl-company">Sling (Orzo)</span>
+          <span class="tl-role">Product and Market Research Intern</span>
+          <span class="tl-date">Jan 2025 - Apr 2025</span>
+        </div>
+        <ul class="tl-bullets">
+          <li>Authored a <strong>PRD for U.S. market entry</strong>, directly informing 3 key roadmap features for a Korean edtech app</li>
+          <li>Synthesized research into personas, value propositions, and messaging frameworks that shaped positioning and feature priorities</li>
+          <li>Developed a region-specific go-to-market plan integrating competitive insights, channel strategy, and feature rollout sequencing</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- DELIVERABLES ALIGNMENT -->
+<section id="deliverables">
+  <div class="section-wrap">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">How my work maps to your deliverables</h2>
+    </div>
+    <div class="deliverables">
+
+      <div class="deliverable-item">
+        <div class="deliverable-tag">NetApp deliverable</div>
+        <h4>Documented processes and submission guidelines</h4>
+        <p>At Unite Us, I authored <strong>SOPs and onboarding workflows</strong> adopted by 500+ stakeholders. Process documentation that people actually use is something I've done in a real-stakes environment.</p>
+      </div>
+
+      <div class="deliverable-item">
+        <div class="deliverable-tag">NetApp deliverable</div>
+        <h4>Centralized, easy-to-use content calendar</h4>
+        <p>At Traverse, I built and maintained a <strong>structured content strategy</strong> with each post mapped to audience insight, brand intent, and metric signal. That's a content calendar with accountability built in.</p>
+      </div>
+
+      <div class="deliverable-item">
+        <div class="deliverable-tag">NetApp deliverable</div>
+        <h4>Baseline engagement metrics and performance summaries</h4>
+        <p>At Traverse, I tracked saves, shares, comments, and profile visits per post and iterated strategy based on engagement data. <strong>Measurement and iteration were built into the workflow from day one.</strong></p>
+      </div>
+
+      <div class="deliverable-item">
+        <div class="deliverable-tag">NetApp deliverable</div>
+        <h4>Channel-ready social content and scaling recommendations</h4>
+        <p>I've distilled complex product positioning into accessible content for a live audience. At Unite Us, I also delivered <strong>recommendations for sustaining the CI repository</strong> post-internship, which maps directly to NetApp's ask.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-wrap">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Skills</h2>
+    </div>
+    <div class="skills-row">
+      <div class="skill-col">
+        <h4>PMM Core</h4>
+        <div class="skill-list">
+          <div class="skill-item">Content Strategy</div>
+          <div class="skill-item">Competitive Intelligence</div>
+          <div class="skill-item">Sales Enablement</div>
+          <div class="skill-item">GTM Strategy</div>
+          <div class="skill-item">Messaging and Positioning</div>
+          <div class="skill-item">PRD Writing</div>
+        </div>
+      </div>
+      <div class="skill-col">
+        <h4>Operations</h4>
+        <div class="skill-list">
+          <div class="skill-item">SOP Authoring</div>
+          <div class="skill-item">Process Documentation</div>
+          <div class="skill-item">Stakeholder Facilitation</div>
+          <div class="skill-item">Content Calendar Management</div>
+          <div class="skill-item">Cross-functional Coordination</div>
+          <div class="skill-item">Onboarding Workflow Design</div>
+        </div>
+      </div>
+      <div class="skill-col">
+        <h4>Analytical</h4>
+        <div class="skill-list">
+          <div class="skill-item">KPI Frameworks</div>
+          <div class="skill-item">Engagement Tracking</div>
+          <div class="skill-item">Market Research</div>
+          <div class="skill-item">Behavioral Design</div>
+          <div class="skill-item">Data Storytelling</div>
+          <div class="skill-item">Growth Hacking</div>
+        </div>
+      </div>
+      <div class="skill-col">
+        <h4>Tools</h4>
+        <div class="skill-list">
+          <div class="skill-item">Confluence</div>
+          <div class="skill-item">Notion</div>
+          <div class="skill-item">Google Suite</div>
+          <div class="skill-item">Figma</div>
+          <div class="skill-item">Excel</div>
+          <div class="skill-item">Canva</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<div class="edu-strip">
+  <div>
+    <div class="edu-school">Minerva University</div>
+    <div class="edu-degree">B.S. Computer Science + Business - Brand Management concentration</div>
+  </div>
+  <div class="edu-courses">
+    <span class="edu-tag">Strategic Brand Leadership</span>
+    <span class="edu-tag">Growth Hacking</span>
+    <span class="edu-tag">Behavioral Design</span>
+    <span class="edu-tag">KPI Frameworks</span>
+    <span class="edu-tag">Marketing Experiments</span>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-id">Rachael <span>Akwa</span></div>
+  <div class="footer-links">
+    <a href="#" id="email-link">Email</a>
+    <a href="https://www.linkedin.com/in/rachaelakwa" target="_blank">LinkedIn</a>
+    <a href="https://github.com/rachaelakwa" target="_blank">GitHub</a>
+  </div>
+</footer>
+
+<script>
+  const e = 'rachael@uni.minerva.edu';
+  document.getElementById('email-link').href = 'mailto:' + e;
+  document.getElementById('hero-email').href = 'mailto:' + e;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.stat-card, .fit-card, .deliverable-item, .skill-col, .tl-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(18px)';
+    el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
