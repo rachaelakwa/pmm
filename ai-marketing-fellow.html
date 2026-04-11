@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rachael Akwa — AI & Digital Marketing</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #F5F1EB;
+    --warm-white: #FDFAF5;
+    --ink: #1a1714;
+    --ink-light: #3d3830;
+    --muted: #8a8278;
+    --accent: #C4622D;
+    --accent-light: #e8a882;
+    --border: #DDD8D0;
+    --card: #FFFFFF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* GRAIN TEXTURE */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.6;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 56px;
+    height: 68px;
+    background: rgba(245, 241, 235, 0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: 0.01em;
+  }
+
+  .nav-logo em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 36px;
+    list-style: none;
+    align-items: center;
+  }
+
+  .nav-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--ink); }
+
+  /* HERO */
+  .hero {
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 120px 56px 80px;
+  }
+
+  .hero-tag {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 28px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .hero-tag::before {
+    content: '';
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+    display: block;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+    font-size: clamp(48px, 5.5vw, 72px);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    max-width: 920px;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-desc {
+    margin-top: 28px;
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--ink-light);
+    max-width: 680px;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 14px;
+    margin-top: 44px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .btn-filled {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: var(--ink);
+    color: var(--cream);
+    padding: 14px 28px;
+    text-decoration: none;
+    border: 1px solid var(--ink);
+    transition: background 0.2s, color 0.2s;
+    display: inline-block;
+  }
+
+  .btn-filled:hover {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .btn-ghost {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    background: transparent;
+    color: var(--ink);
+    padding: 14px 28px;
+    text-decoration: none;
+    border: 1px solid var(--border);
+    transition: border-color 0.2s;
+    display: inline-block;
+  }
+
+  .btn-ghost:hover { border-color: var(--ink); }
+
+  /* SECTION */
+  .section-wrap {
+    padding: 100px 56px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .section-header {
+    margin-bottom: 56px;
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+  }
+
+  .section-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 38px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+
+  .divider {
+    height: 1px;
+    background: var(--border);
+    margin: 0 56px;
+  }
+
+  /* WHY ME */
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border);
+  }
+
+  .why-card {
+    background: var(--warm-white);
+    padding: 44px 40px;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.2s;
+  }
+
+  .why-card:hover { background: var(--card); }
+
+  .why-icon {
+    font-size: 32px;
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .why-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 14px;
+    line-height: 1.3;
+  }
+
+  .why-card p {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--muted);
+  }
+
+  .why-card p strong {
+    color: var(--ink-light);
+    font-weight: 500;
+  }
+
+  /* DESIGN WORK GALLERY */
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .gallery-item {
+    background: var(--card);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .gallery-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.08);
+  }
+
+  .gallery-img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    display: block;
+    background: var(--warm-white);
+  }
+
+  .gallery-caption {
+    padding: 20px 24px;
+  }
+
+  .gallery-type {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 8px;
+  }
+
+  .gallery-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 17px;
+    color: var(--ink);
+  }
+
+  /* AI TOOLS */
+  .ai-story {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 56px 64px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .ai-story h3 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 28px;
+    margin-bottom: 24px;
+    color: var(--ink);
+  }
+
+  .ai-story p {
+    font-size: 15px;
+    line-height: 1.8;
+    color: var(--ink-light);
+    margin-bottom: 20px;
+  }
+
+  .ai-story p:last-child {
+    margin-bottom: 0;
+  }
+
+  .ai-story strong {
+    color: var(--ink);
+    font-weight: 500;
+  }
+
+  .ai-highlight {
+    background: rgba(196, 98, 45, 0.08);
+    padding: 32px 36px;
+    border-left: 3px solid var(--accent);
+    margin-top: 32px;
+  }
+
+  .ai-highlight-title {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  .ai-highlight p {
+    font-size: 14px;
+    line-height: 1.75;
+    color: var(--ink-light);
+    margin-bottom: 0;
+  }
+
+  /* EXPERIENCE QUICK */
+  .exp-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+
+  .exp-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    padding: 32px;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+
+  .exp-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+  }
+
+  .exp-company {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 19px;
+    margin-bottom: 6px;
+    color: var(--ink);
+  }
+
+  .exp-role {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 16px;
+    display: block;
+  }
+
+  .exp-card p {
+    font-size: 13px;
+    line-height: 1.7;
+    color: var(--muted);
+  }
+
+  .exp-card p strong {
+    color: var(--ink-light);
+    font-weight: 500;
+  }
+
+  /* SKILLS COMPACT */
+  .skills-compact {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--border);
+  }
+
+  .skill-col {
+    background: var(--warm-white);
+    padding: 36px 32px;
+  }
+
+  .skill-col h4 {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+  }
+
+  .skill-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .skill-item {
+    font-size: 13px;
+    color: var(--ink-light);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .skill-item::before {
+    content: '';
+    width: 4px;
+    height: 4px;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--cream);
+    border-top: 1px solid var(--border);
+    padding: 44px 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .footer-id {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-style: italic;
+    font-size: 18px;
+    color: var(--ink);
+  }
+
+  .footer-id span { color: var(--accent); }
+
+  .footer-links {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+
+  .footer-links a {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+    text-transform: uppercase;
+  }
+
+  .footer-links a:hover { color: var(--ink); }
+
+  /* ANIMATIONS */
+  .reveal {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.55s ease, transform 0.55s ease;
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    .hero { padding: 100px 24px 60px; }
+    .section-wrap { padding: 72px 24px; }
+    .divider { margin: 0 24px; }
+    .why-grid { grid-template-columns: 1fr; }
+    .gallery { grid-template-columns: 1fr; }
+    .ai-story { padding: 40px 32px; }
+    .exp-cards { grid-template-columns: 1fr; }
+    .skills-compact { grid-template-columns: repeat(2, 1fr); }
+    footer { padding: 32px 24px; flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="general-pmm.html" class="nav-logo">Rachael <em>Akwa</em></a>
+  <ul class="nav-links">
+    <li><a href="#why-me">Why me</a></li>
+    <li><a href="#design-work">Design work</a></li>
+    <li><a href="#ai-tools">AI tools</a></li>
+    <li><a href="#experience">Experience</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section>
+  <div class="hero">
+    <p class="hero-tag">AI & Digital Marketing Portfolio</p>
+    <h1>I build marketing assets, websites, and <em>AI-powered</em> content strategies</h1>
+    <p class="hero-desc">CS + Business student at Minerva University. I've created 25+ marketing assets in Canva and Figma, built websites from scratch in HTML/CSS/JavaScript/React, and use Claude daily for content planning and strategy. Currently leading product marketing at Traverse, a travel planning startup.</p>
+    <div class="hero-cta">
+      <a href="#design-work" class="btn-filled">See my work</a>
+      <a href="#" class="btn-ghost" id="hero-email">Get in touch</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WHY ME -->
+<section id="why-me">
+  <div class="section-wrap">
+    <div class="section-header">
+      <span class="section-num">01</span>
+      <h2 class="section-title">Why I'm a fit</h2>
+    </div>
+    <div class="why-grid">
+      <div class="why-card reveal">
+        <span class="why-icon">🎨</span>
+        <h3>Design + AI Experience</h3>
+        <p>Created <strong>25+ marketing assets</strong> using Canva and Figma for Instagram, TikTok, and app UI/UX. I use <strong>Claude daily</strong> for content strategy and planning.</p>
+      </div>
+      <div class="why-card reveal">
+        <span class="why-icon">💻</span>
+        <h3>Technical Foundation</h3>
+        <p>I build websites from scratch with <strong>HTML/CSS/JavaScript/React</strong>. Learning Squarespace or Wix is trivial compared to coding from zero.</p>
+      </div>
+      <div class="why-card reveal">
+        <span class="why-icon">🚀</span>
+        <h3>Marketing + Strategy</h3>
+        <p>Led product marketing at a startup. Shipped <strong>live Instagram campaigns</strong>, mapped audience tensions, and iterated based on engagement data.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- DESIGN WORK -->
+<section id="design-work">
+  <div class="section-wrap">
+    <div class="section-header">
+      <span class="section-num">02</span>
+      <h2 class="section-title">Design work</h2>
+    </div>
+    <div class="gallery">
+      <div class="gallery-item reveal">
+        <img src="assets/Post_3_2.png" alt="Group Travel Carousel" class="gallery-img">
+        <div class="gallery-caption">
+          <div class="gallery-type">Instagram Carousel · Canva</div>
+          <div class="gallery-title">Group Planning Friction</div>
+        </div>
+      </div>
+      <div class="gallery-item reveal">
+        <img src="assets/8.png" alt="Traverse Usage Stats" class="gallery-img">
+        <div class="gallery-caption">
+          <div class="gallery-type">Instagram · Canva</div>
+          <div class="gallery-title">Product Traction Proof</div>
+        </div>
+      </div>
+      <div class="gallery-item reveal">
+        <img src="assets/Target_Consumer_Profile_.png" alt="Audience Research" class="gallery-img">
+        <div class="gallery-caption">
+          <div class="gallery-type">Brand Strategy · Canva</div>
+          <div class="gallery-title">Target Consumer Profile</div>
+        </div>
+      </div>
+      <div class="gallery-item reveal">
+        <img src="assets/Traverse_Post_1.png" alt="Brand Positioning Post" class="gallery-img">
+        <div class="gallery-caption">
+          <div class="gallery-type">Instagram · Canva</div>
+          <div class="gallery-title">Brand Synthesis Post</div>
+        </div>
+      </div>
+      <div class="gallery-item reveal">
+        <img src="assets/1775940689713_image.png" alt="App UI Flow" class="gallery-img">
+        <div class="gallery-caption">
+          <div class="gallery-type">App UI/UX · Figma</div>
+          <div class="gallery-title">Planning Flow Redesign</div>
+        </div>
+      </div>
+      <div class="gallery-item reveal">
+        <img src="assets/Bookings.png" alt="In-App Flight Booking" class="gallery-img">
+        <div class="gallery-caption">
+          <div class="gallery-type">Feature Design · Figma</div>
+          <div class="gallery-title">In-App Flight Booking</div>
+        </div>
+      </div>
+      <div class="gallery-item reveal">
+        <img src="assets/Travel_identity.png" alt="Travel Identity Feature" class="gallery-img">
+        <div class="gallery-caption">
+          <div class="gallery-type">Feature Design · Canva</div>
+          <div class="gallery-title">Travel Identity System</div>
+        </div>
+      </div>
+      <div class="gallery-item reveal">
+        <img src="assets/11.png" alt="Brand Messaging" class="gallery-img">
+        <div class="gallery-caption">
+          <div class="gallery-type">Instagram · Canva</div>
+          <div class="gallery-title">Group Travel Positioning</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- AI TOOLS -->
+<section id="ai-tools">
+  <div class="section-wrap">
+    <div class="section-header">
+      <span class="section-num">03</span>
+      <h2 class="section-title">How I use AI tools</h2>
+    </div>
+    <div class="ai-story reveal">
+      <h3>Claude as a strategic thought partner</h3>
+      <p>I use <strong>Claude</strong> daily for content planning and marketing strategy. Instead of treating it as a content generator, I use it as a <strong>thought partner</strong> to stress-test positioning, map audience tensions to content themes, and uncover angles I wouldn't have considered on my own.</p>
+      
+      <p>For Traverse's Instagram strategy, I worked with Claude to identify decision fatigue and group coordination friction as core audience pain points, then mapped those tensions to 12 distinct post concepts. Each post tied to a specific brand intent (awareness, education, engagement) and a metric signal (saves, shares, comments, profile visits).</p>
+
+      <div class="ai-highlight">
+        <div class="ai-highlight-title">My AI experimentation mindset</div>
+        <p>What excites me about AI in marketing isn't automation, it's <strong>acceleration</strong>. I'm curious about how AI can help marketers think more strategically, test ideas faster, and create content that's sharper and more audience-aligned. I want to explore tools beyond Claude (like Midjourney for visual inspiration, Jasper for copy variations) and bring that experimentation mindset to your consulting practice.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="section-wrap">
+    <div class="section-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title">Relevant experience</h2>
+    </div>
+    <div class="exp-cards">
+      <div class="exp-card reveal">
+        <div class="exp-company">Traverse</div>
+        <span class="exp-role">Product Marketing Lead</span>
+        <p>Created <strong>25+ marketing assets</strong> in Canva/Figma. Led full app redesign. Used <strong>Claude for content strategy</strong> and audience tension mapping.</p>
+      </div>
+      <div class="exp-card reveal">
+        <div class="exp-company">Unite Us</div>
+        <span class="exp-role">PMM Intern</span>
+        <p>Built <strong>competitive battlecards</strong> and sales enablement materials. Collaborated across sales, product, and design teams.</p>
+      </div>
+      <div class="exp-card reveal">
+        <div class="exp-company">Sling</div>
+        <span class="exp-role">PMM Intern</span>
+        <p>Contributed to <strong>PRD development</strong> by identifying competitive gaps and customer pain points for U.S. market launch.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="section-wrap">
+    <div class="section-header">
+      <span class="section-num">05</span>
+      <h2 class="section-title">Skills</h2>
+    </div>
+    <div class="skills-compact">
+      <div class="skill-col reveal">
+        <h4>Design Tools</h4>
+        <div class="skill-list">
+          <div class="skill-item">Canva</div>
+          <div class="skill-item">Figma</div>
+          <div class="skill-item">Adobe Suite</div>
+        </div>
+      </div>
+      <div class="skill-col reveal">
+        <h4>AI Tools</h4>
+        <div class="skill-list">
+          <div class="skill-item">Claude (daily)</div>
+          <div class="skill-item">ChatGPT</div>
+          <div class="skill-item">Strategy AI</div>
+        </div>
+      </div>
+      <div class="skill-col reveal">
+        <h4>Technical</h4>
+        <div class="skill-list">
+          <div class="skill-item">HTML/CSS</div>
+          <div class="skill-item">JavaScript</div>
+          <div class="skill-item">React</div>
+          <div class="skill-item">Python</div>
+        </div>
+      </div>
+      <div class="skill-col reveal">
+        <h4>Marketing</h4>
+        <div class="skill-list">
+          <div class="skill-item">Content Strategy</div>
+          <div class="skill-item">Social Media</div>
+          <div class="skill-item">Brand Guidelines</div>
+          <div class="skill-item">Positioning</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-id">Rachael <span>Akwa</span></div>
+  <div class="footer-links">
+    <a href="#" id="email-link">Email</a>
+    <a href="https://www.linkedin.com/in/rachaelakwa" target="_blank">LinkedIn</a>
+    <a href="https://github.com/rachaelakwa" target="_blank">GitHub</a>
+    <a href="general-pmm.html">Full Portfolio</a>
+  </div>
+</footer>
+
+<script>
+  const e = 'rachael@uni.minerva.edu';
+  document.getElementById('email-link').href = 'mailto:' + e;
+  document.getElementById('hero-email').href = 'mailto:' + e;
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.08 });
+
+  document.querySelectorAll('.reveal').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(18px)';
+    el.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
